@@ -10,19 +10,24 @@ function InputAction ({ value, setValue, action, label }) {
 
   const enterPress = (e) => {
     if (e.key === "Enter") {
-      _action(e)
+      _action(e.target.value)
     }
   }
 
-  const _action = (e) => {
-    _setValue("")
-    action()
-    e.target.focus()
+  const _action = (value) => {
+    if (value) {
+      _setValue("")
+      action()
+    }
+  }
+  
+  const stayFocus = () => {
+    document.querySelector(".inputAction input").focus()
   }
 
   return (
     <div className="inputAction">
-        <input value={_value} onChange={handleType} onKeyPress={enterPress}/>
+        <input value={_value} onChange={handleType} onKeyPress={enterPress} onBlur={stayFocus}/>
         <button className="button button-small" onClick={_action}>Envoyer</button>
     </div>
   )

@@ -11,11 +11,10 @@ function Chat ({ user }) {
 
   useEffect(() => {
     const unsubscribeNewMessage = onNewMessage(newMessages => {
-      setMessages([...window.messages, ...newMessages])
-      const lastMessage = document.querySelector(".chat_messages").lastChild
-      if (lastMessage) {
-        lastMessage.scrollIntoView()
-      }
+      const sortedMessage = [...window.messages, ...newMessages]
+        .sort((messageA, messageB) => messageA.time - messageB.time)
+      setMessages(sortedMessage)
+      goToLastMessage()
     })
     return unsubscribeNewMessage
   }, [])
@@ -28,9 +27,23 @@ function Chat ({ user }) {
     return unsubscribeNewUser
   }, [])
 
-  const getColor = () => {
+  useEffect(() => {
+    window.addEventListener('resize', goToLastMessage)
+    return () => {
+      window.removeEventListener('resize', goToLastMessage)
+    }
+  }, [])
+
+  const goToLastMessage = () => {
+    const lastMessage = document.querySelector(".chat_messages").lastChild
+    if (lastMessage) {
+      lastMessage.scrollIntoView()
+    }
+  }
+
+  const getColor = (userName) => {
     try {
-      const color = users.find(({ name }) => user.name === name).color
+      const color = users.find(({ name }) => userName === name).color
       return { color }
     } catch (err) {
       return { color: "#000000" }
@@ -40,7 +53,6 @@ function Chat ({ user }) {
   const sendMessage = async () => {
     addMessage({ time: new Date().getTime(), user: user.name, message })
   }
-
   
   return (
     <div className="chat">
