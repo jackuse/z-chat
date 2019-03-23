@@ -1,14 +1,64 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html, body, .app, .fullscreen {
+  --background-color: #9b4dca;
+  background: var(--background-color);
+  width: 100%;
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.modal, .modal_background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+}
+
+.modal_background {
+  background: var(--background-color);
+}
+
+.chat {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.chat_messages {
+  border-radius: 5px;
+  background: #FFFFFF;
+  flex: 1;
+  overflow-y: scroll;
+  margin: 15px 0;
+  padding: 5px;
+}
+
+.inputAction {
+  display: flex;
+}
+
+.inputAction input {
+  background: #FFFFFF;
+}
+
+.inputAction .button {
+  --button-color: #27ae60;
+  background: var(--button-color);
+  border-color: var(--button-color);
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media(min-width: 40.0rem) {
+  .modal {
+    border-radius: 20px;
+    max-height: 50%;
+    margin: auto;
+    width: 50%;
+  }  
 }
