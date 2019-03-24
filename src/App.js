@@ -1,6 +1,8 @@
-import React, { useState } from "react"
-import Chat from "./Chat"
+import React, { useState, Suspense } from "react"
 import Login from "./Login"
+import Loader from "./Loader";
+
+const Chat = React.lazy(() => import('./Chat'))
 
 function App () {
   const [isConnected, setIsConnected] = useState(false)
@@ -13,7 +15,7 @@ function App () {
 
   return (
     <div className="container fullscreen">
-      { isConnected ? <Chat user={user} /> : <Login onLogin={login} /> }
+      { isConnected ? <Suspense fallback={Loader}><Chat user={user} /></Suspense> : <Login onLogin={login} /> }
     </div>
   )
 }

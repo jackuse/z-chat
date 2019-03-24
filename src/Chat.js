@@ -50,7 +50,7 @@ function Chat ({ user }) {
     }
   }
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     addMessage({ time: new Date().getTime(), user: user.name, message })
   }
   
