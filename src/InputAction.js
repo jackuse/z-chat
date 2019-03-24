@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 
 function InputAction ({ value, setValue, action, label }) {
   const [_value, _setValue] = useState(value)
@@ -21,13 +21,14 @@ function InputAction ({ value, setValue, action, label }) {
     }
   }
   
+  const inputRef = useRef(null)
   const stayFocus = () => {
-    document.querySelector(".inputAction input").focus()
+    inputRef.current.focus()
   }
 
   return (
     <div className="inputAction">
-        <input value={_value} onChange={handleType} onKeyPress={enterPress} onBlur={stayFocus}/>
+        <input ref={inputRef} value={_value} onChange={handleType} onKeyPress={enterPress} onBlur={stayFocus}/>
         <button className="button button-small" onClick={_action}>Envoyer</button>
     </div>
   )

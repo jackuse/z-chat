@@ -33,7 +33,7 @@ function Chat ({ user }) {
       window.removeEventListener('resize', goToLastMessage)
     }
   }, [])
-
+  
   const goToLastMessage = () => {
     const lastMessage = document.querySelector(".chat_messages").lastChild
     if (lastMessage) {
