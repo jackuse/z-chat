@@ -1,23 +1,18 @@
 import React, { useState, Suspense } from "react"
-import Login from "./Login"
+
 import Loader from "./Loader";
 
 const Chat = React.lazy(() => import('./Chat'))
+const Login = React.lazy(() => import('./Login'))
 
 function App () {
-  const [isConnected, setIsConnected] = useState(false)
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
 
-  const login = (user) => {
-    setUser(user)
-    setIsConnected(true)
-  }
+  const Component = user
+    ? <Chat user={user} />
+    : <Login onLogin={setUser} />
 
-  return (
-    <div className="container fullscreen">
-      { isConnected ? <Suspense fallback={Loader}><Chat user={user} /></Suspense> : <Login onLogin={login} /> }
-    </div>
-  )
+  return <Suspense fallback={Loader}>{Component}</Suspense>
 }
 
 export default App
