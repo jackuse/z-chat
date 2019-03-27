@@ -33,9 +33,9 @@ function Chat ({ user }) {
       window.removeEventListener('resize', goToLastMessage)
     }
   }, [])
-  
+
   const goToLastMessage = () => {
-    const lastMessage = document.querySelector(".chat_messages").lastChild
+    const lastMessage = document.querySelector(".chat").lastChild
     if (lastMessage) {
       lastMessage.scrollIntoView()
     }
@@ -53,15 +53,15 @@ function Chat ({ user }) {
   const sendMessage = () => {
     addMessage({ time: new Date().getTime(), user: user.name, message })
   }
-  
+
   return (
-    <div className="chat">
-      <div className="chat_messages">
+    <div className="container">
+      <div className="chat">
         { messages.map(({ time, user: userName, message }) => {
           return <div key={time}><strong style={getColor(userName)}>{userName}</strong> : {message}</div>
         }) }
       </div>
-      <div className="chat_submit">
+      <div>
         <InputAction value={message} setValue={setMessage} action={sendMessage} label="Envoyer" />
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { addUser } from "./firebase"
-import Modal from "./Modal";
 
 function Login ({ onLogin = () => {} }) {
   const USER_NAME_STORAGE = "userName"
@@ -16,7 +15,7 @@ function Login ({ onLogin = () => {} }) {
 
   const setUserColor = (e) => {
     const color = e.target.value
-    setUser({ name: user.name, color }) 
+    setUser({ name: user.name, color })
   }
 
   const login = (e) => {
@@ -29,8 +28,8 @@ function Login ({ onLogin = () => {} }) {
   }
 
   return (
-    <Modal>
-      <form onSubmit={login}>
+    <div className="container">
+      <form onSubmit={login} className="login">
         <label>
           Pseudo
           <input value={user.name} onChange={setUserName} />
@@ -41,7 +40,7 @@ function Login ({ onLogin = () => {} }) {
         </label>
         <input type="submit" className="button" value="Rejoindre"></input>
       </form>
-    </Modal>
+    </div>
   )
 }
 
