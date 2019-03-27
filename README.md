@@ -4,7 +4,7 @@
 
 ```shell
 git clone https://github.com/Yopadd/z-chat.git
-git checkout step1
+git checkout step0
 npm ci
 npm start
 ```
