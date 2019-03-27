@@ -1,44 +1,22 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
+
+import { useFirebaseList, useEvent } from './hooks';
 import { onNewMessage, onNewUser, addMessage } from "./firebase"
 import InputAction from "./InputAction";
 
-function Chat ({ user }) {
-  const [messages, setMessages] = useState([])
-  const [users, setUsers] = useState([])
-  window.messages = messages
-  window.users = users
-
-  useEffect(() => {
-    const unsubscribeNewMessage = onNewMessage(newMessages => {
-      const sortedMessage = [...window.messages, ...newMessages]
-        .sort((messageA, messageB) => messageA.time - messageB.time)
-      setMessages(sortedMessage)
-      goToLastMessage()
-    })
-    return unsubscribeNewMessage
-  }, [])
-
-
-  useEffect(() => {
-    const unsubscribeNewUser = onNewUser(newUsers => {
-      setUsers([...window.users, ...newUsers])
-    })
-    return unsubscribeNewUser
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('resize', goToLastMessage)
-    return () => {
-      window.removeEventListener('resize', goToLastMessage)
-    }
-  }, [])
-
-  const goToLastMessage = () => {
-    const lastMessage = document.querySelector(".chat").lastChild
-    if (lastMessage) {
-      lastMessage.scrollIntoView()
-    }
+const goToLastMessage = () => {
+  const lastMessage = document.querySelector(".chat").lastChild
+  if (lastMessage) {
+    lastMessage.scrollIntoView()
   }
+}
+
+function Chat ({ user }) {
+  let messages = useFirebaseList(onNewMessage, goToLastMessage)
+  messages = messages.sort((msgA, msgB) => msgA.time - msgB.time)
+  const users = useFirebaseList(onNewUser);
+
+  useEvent('resize', goToLastMessage);
 
   const getColor = (userName) => {
       const user = users.find(({ name }) => userName === name);

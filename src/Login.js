@@ -1,12 +1,15 @@
 import React, { useState } from "react"
+
 import { addUser } from "./firebase"
+import { useLocalStorage } from './hooks';
+
+const USER_NAME_STORAGE = "userName"
+const USER_COLOR_STORAGE = "userColor"
 
 function Login ({ onLogin = () => {} }) {
-  const USER_NAME_STORAGE = "userName"
-  const USER_COLOR_STORAGE = "userColor"
-  const userName = window.localStorage.getItem(USER_NAME_STORAGE) || ""
-  const userColor = window.localStorage.getItem(USER_COLOR_STORAGE) || "#000000"
-  const [user, setUser] = useState({ name: userName, color: userColor })
+  const [name, saveUserName] = useLocalStorage(USER_NAME_STORAGE, '')
+  const [color, saveUserColor] = useLocalStorage(USER_COLOR_STORAGE, '#000000')
+  const [user, setUser] = useState({ name, color })
 
   const set = (prop) => (e) => {
     setUser({ ...user, [prop]: e.target.value })
@@ -16,8 +19,8 @@ function Login ({ onLogin = () => {} }) {
     e.preventDefault()
     setUser(user)
     addUser(user)
-    window.localStorage.setItem(USER_NAME_STORAGE, user.name)
-    window.localStorage.setItem(USER_COLOR_STORAGE, user.color)
+    saveUserName(user.name)
+    saveUserColor(user.color)
     onLogin(user)
   }
 
