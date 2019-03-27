@@ -1,7 +1,6 @@
 import React from "react"
 
-import { useFirebaseList, useEvent } from './hooks';
-import { onNewMessage, onNewUser, addMessage } from "./firebase"
+import { useEvent } from './hooks';
 import InputAction from "./InputAction";
 
 const goToLastMessage = () => {
@@ -12,32 +11,15 @@ const goToLastMessage = () => {
 }
 
 function Chat ({ user }) {
-  let messages = useFirebaseList(onNewMessage, goToLastMessage)
-  messages = messages.sort((msgA, msgB) => msgA.time - msgB.time)
-  const users = useFirebaseList(onNewUser);
-
   useEvent('resize', goToLastMessage);
 
-  const getColor = (userName) => {
-      const user = users.find(({ name }) => userName === name);
-      const color = user ? user.color : '#000000';
-      return { color };
-  }
-
-  const sendMessage = (message) => {
-    addMessage({ time: new Date().getTime(), user: user.name, message })
-  }
 
   return (
     <div className="container">
       <div className="chat">
-        { messages.map(({ time, user: userName, message }) => (
-          <div key={time}>
-            <strong style={getColor(userName)}>{userName}</strong> : {message}
-          </div>
-        )) }
+        Miaou ?
       </div>
-      <InputAction action={sendMessage} label="Envoyer" />
+      <InputAction label="Envoyer" />
     </div>
   )
 }

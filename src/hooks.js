@@ -1,15 +1,7 @@
 import { useEffect, useReducer } from 'react';
 
-export function useLocalStorage(key, defaultValue) {
-    const value = localStorage.getItem(key) || defaultValue
-    const setItem = (newValue) => localStorage.setItem(key, newValue)
-
-    return [value, setItem]
-}
-
 export function useFirebaseList(method, onSet = () => {}) {
     const [data, addData] = useReducer((oldData, newData) => [...oldData, ...newData], [])
-    console.log(data);
     useEffect(() => {
         return method((newData) => {
             addData(newData)
