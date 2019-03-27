@@ -1,68 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Z-chat
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+```shell
+git clone https://github.com/Yopadd/z-chat.git
+git checkout step1
+npm ci
+npm start
+```
 
-### `npm start`
+## Objectif
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+L'objectif est de développer une simple application de chat. A peu-près tout est permis tant qu'à la fin
+vous arriver à envoyer des messages et que les autres et vous même puissiez les lires.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Dans le dossier `maquettes` vous trouverais deux maquettes, qui peuvent vous guider.
 
-### `npm test`
+L'application est suffisamment simple pour ne pas avoir à se poser des questions sur son architecture.
+Pas de _router_ ou de _redux_, restons simple. Tout vos composant seront à la racine du dossier `src`.
+C'est aussi le seul dossier dont vous avez besoin.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Vous commencerez avec quelques méthodes et composants.
 
-### `npm run build`
+Le back-end est propulsé par Firebase. Ca configuration est déjà faite et le module `firebase.js` expose
+quelques méthodes documentés dans `firebase.md`.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Un composant `App` sont rôle est juste de faire la balance entre la page _Login_ et _Chat_
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Un composant `Login`, il prend une function `onLogin` en paramètre. Cette function vous permettra sûrement
+de retourner l'utilisateur créé par la page _Login_.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Un composant `Chat`, il prend un `User` (cf. `firebase.md`) en paramètre. C'est le coeur de votre application
+C'est ici que ce déroulera un grande parti du TP.
 
-### `npm run eject`
+## Contraintes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Vous n'avais pas le droit d'utiliser de `class`. Tout vos composant doivent être des functions et utiliser
+le plus possible de nouveautés de _React_.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Le composant `Chat` doit être _lazy loader_.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Etape 1
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Avoir une page _Login_ qui créer un utilisateur et qui vous renvois sur la page _Chat_.
 
-## Learn More
+__Bonus__: Avec le _localStorage_ faite en sorte de ne pas avoir à retaper à chaque fois le dernier utilisateur
+rentré.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<details>
+ <summary>Aide 1</summary>
+  Il faut utiliser le hooks `useState` pour créer un utilisateur qui à doit ressembler à
+  `{ name: 'Alber' color: '#000000' }`.
+</details>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<details>
+ <summary>Aide 2</summary>
+  Pour envoyer un utilisateur avec Firebase il faut utiliser la méthode `addUser` du module
+  `firebase.js`.
+  ex:
+  <pre>addUser({ name: 'Alber' color: '#000000' })</pre>
+</details>
 
-### Code Splitting
+<details>
+ <summary>Aide 3</summary>
+  Votre formulaire doit executer une function qui ressemble à
+  <pre>const login = (e) => {
+      e.preventDefault()
+      setUser(user)
+      addUser(user)
+      onLogin(user)
+  }</pre>
+</details>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Etape 2
 
-### Analyzing the Bundle Size
+Récupérer et afficher dans le bonne ordre les messages envoyés par _Firebase_.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+<details>
+ <summary>Aide 1</summary>
+  Il faut utiliser le hooks `useEffect`. Cette méthode prend un deuxième paramètre qui
+  est un tableau de valeur. La fonction de `useEffect` ne sera rejouée qui si une des
+  valeur du tableau change. Donc si on lui donne un tableau [] la fonction ne sera joué
+  qu'une seul fois au premier rendu du composant. A l'instar de <code>componentDidMount<code>.
+</details>
 
-### Making a Progressive Web App
+## Etape 3
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Afficher le nom des utilisateurs en avec leur couleur.
 
-### Advanced Configuration
+## Etape 4
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Envoyer des messages. Isoler cette parti dans un composant.
 
-### Deployment
+__Bonus__: sur téléphone faite en sorte de garder le focus sur le clavier après l'envoie d'un message
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Etape 5
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Ajouter la gestion d'erreur réseau avec _Error Boundaries_
