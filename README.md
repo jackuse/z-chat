@@ -49,14 +49,14 @@ rentré.
 
 <details>
  <summary>Aide 1</summary>
-  Il faut utiliser le hooks `useState` pour créer un utilisateur qui à doit ressembler à
-  `{ name: 'Alber' color: '#000000' }`.
+  Il faut utiliser le hooks <code>useState</code> pour créer un utilisateur qui à doit ressembler à
+  <code>{ name: 'Alber' color: '#000000' }</code>.
 </details>
 
 <details>
  <summary>Aide 2</summary>
-  Pour envoyer un utilisateur avec Firebase il faut utiliser la méthode `addUser` du module
-  `firebase.js`.
+  Pour envoyer un utilisateur avec Firebase il faut utiliser la méthode <code>addUser</code> du module
+  <code>firebase.js</code>.
   ex:
   <pre>addUser({ name: 'Alber' color: '#000000' })</pre>
 </details>
@@ -78,10 +78,10 @@ Récupérer et afficher dans le bonne ordre les messages envoyés par _Firebase_
 
 <details>
  <summary>Aide 1</summary>
-  Il faut utiliser le hooks `useEffect`. Cette méthode prend un deuxième paramètre qui
-  est un tableau de valeur. La fonction de `useEffect` ne sera rejouée qui si une des
+  Il faut utiliser le hooks <code>useEffect</code>. Cette méthode prend un deuxième paramètre qui
+  est un tableau de valeur. La fonction de <code>useEffect</code> ne sera rejouée qui si une des
   valeur du tableau change. Donc si on lui donne un tableau [] la fonction ne sera joué
-  qu'une seul fois au premier rendu du composant. A l'instar de <code>componentDidMount<code>.
+  qu'une seul fois au premier rendu du composant. A l'instar de <code>componentDidMount</code>.
 </details>
 
 ## Etape 3
