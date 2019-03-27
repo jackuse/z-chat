@@ -8,14 +8,8 @@ function Login ({ onLogin = () => {} }) {
   const userColor = window.localStorage.getItem(USER_COLOR_STORAGE) || "#000000"
   const [user, setUser] = useState({ name: userName, color: userColor })
 
-  const setUserName = (e) => {
-    const name = e.target.value
-    setUser({ name, color: user.color })
-  }
-
-  const setUserColor = (e) => {
-    const color = e.target.value
-    setUser({ name: user.name, color })
+  const set = (prop) => (e) => {
+    setUser({ ...user, [prop]: e.target.value })
   }
 
   const login = (e) => {
@@ -32,11 +26,11 @@ function Login ({ onLogin = () => {} }) {
       <form onSubmit={login} className="login">
         <label>
           Pseudo
-          <input value={user.name} onChange={setUserName} />
+          <input value={user.name} onChange={set('name')} />
         </label>
         <label>
           Couleur
-          <input type="color" value={user.color} onChange={setUserColor} />
+          <input type="color" value={user.color} onChange={set('color')} />
         </label>
         <input type="submit" className="button" value="Rejoindre"></input>
       </form>

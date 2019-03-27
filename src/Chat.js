@@ -3,7 +3,6 @@ import { onNewMessage, onNewUser, addMessage } from "./firebase"
 import InputAction from "./InputAction";
 
 function Chat ({ user }) {
-  const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState([])
   window.messages = messages
@@ -42,28 +41,25 @@ function Chat ({ user }) {
   }
 
   const getColor = (userName) => {
-    try {
-      const color = users.find(({ name }) => userName === name).color
-      return { color }
-    } catch (err) {
-      return { color: "#000000" }
-    }
+      const user = users.find(({ name }) => userName === name);
+      const color = user ? user.color : '#000000';
+      return { color };
   }
 
-  const sendMessage = () => {
+  const sendMessage = (message) => {
     addMessage({ time: new Date().getTime(), user: user.name, message })
   }
 
   return (
     <div className="container">
       <div className="chat">
-        { messages.map(({ time, user: userName, message }) => {
-          return <div key={time}><strong style={getColor(userName)}>{userName}</strong> : {message}</div>
-        }) }
+        { messages.map(({ time, user: userName, message }) => (
+          <div key={time}>
+            <strong style={getColor(userName)}>{userName}</strong> : {message}
+          </div>
+        )) }
       </div>
-      <div>
-        <InputAction value={message} setValue={setMessage} action={sendMessage} label="Envoyer" />
-      </div>
+      <InputAction action={sendMessage} label="Envoyer" />
     </div>
   )
 }

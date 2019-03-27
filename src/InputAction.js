@@ -1,35 +1,40 @@
 import React, { useState, useRef } from "react"
 
-function InputAction ({ value, setValue, action }) {
-  const [_value, _setValue] = useState(value)
+function InputAction ({ action, label }) {
+  const [value, setValue] = useState('')
 
   const handleType = (e) => {
-    _setValue(e.target.value)
     setValue(e.target.value)
   }
 
   const enterPress = (e) => {
     if (e.key === "Enter") {
-      _action(e.target.value)
+      _action()
     }
   }
 
-  const _action = (value) => {
+  const _action = () => {
     if (value) {
-      _setValue("")
-      action()
+      setValue("")
+      action(value)
     }
   }
-  
+
   const inputRef = useRef(null)
-  const stayFocus = () => {
-    inputRef.current.focus()
-  }
+  const stayFocus = () => inputRef.current.focus()
 
   return (
     <div className="inputAction">
-        <input ref={inputRef} value={_value} onChange={handleType} onKeyPress={enterPress} onBlur={stayFocus}/>
-        <button className="button button-small" onClick={_action}>Envoyer</button>
+      <input
+        ref={inputRef}
+        value={value}
+        onChange={handleType}
+        onKeyPress={enterPress}
+        onBlur={stayFocus}
+      />
+      <button className="button button-small" onClick={_action}>
+        {label}
+      </button>
     </div>
   )
 }
