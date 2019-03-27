@@ -4,31 +4,31 @@
 
 ### addMessage
 
-`Message => Message`
+`Message => Message`  
 Ajoute un message en base et retourne ce message
 
 ### addUser
 
-`User => void`
+`User => void`  
 Ajoute un utilisateur en base
 
 ### removeUser
 
-`User.name => void`
+`User.name => void`  
 Supprime un utilisateur en base
 
 ### onNewMassage
 
-`(Message[] => void) => UnsubscribeMethod`
-S'inscrire à l'écoute de l'arrivé de nouveaux messages.  
-La première fois qu'elle est appelée elle retourne la totalité des messages.
+`(Message[] => void) => UnsubscribeMethod`  
+S'inscrire à l'écoute de l'arrivée de nouveaux messages.  
+La première fois qu'elle est appelée elle retourne la totalité des messages.  
 Cette méthode retourne une function pour ce désinscrire.
 
 ### onNewMessage
 
-`(User[] => void) => UnsubscribeMethod`
-S'inscrire à l'écoute de l'arrivé de nouveaux utilisateurs.  
-La première fois qu'elle est appelée elle retourne la totalité des utilisateurs.
+`(User[] => void) => UnsubscribeMethod`  
+S'inscrire à l'écoute de l'arrivée de nouveaux utilisateurs.  
+La première fois qu'elle est appelée elle retourne la totalité des utilisateurs.  
 Cette méthode retourne une function pour ce désinscrire.
 
 ## Types
@@ -47,4 +47,3 @@ User: {
 
 UnsubscribeMethod: () => void
 ```
-
