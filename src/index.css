@@ -1,40 +1,36 @@
-html, body, .app, .fullscreen {
-  --background-color: #9b4dca;
-  background: var(--background-color);
-  width: 100%;
-  height: 100%;
+html, body, #root {
+  background: #9b4dca;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.modal, .modal_background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.modal {
-  background: white;
-  padding: 30px;
-}
-
-.modal_background {
-  background: var(--background-color);
-}
-
-.chat {
+.container {
   display: flex;
   flex-flow: column;
   height: 100%;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.chat_messages {
+.login, .chat {
+  padding: 5px;
   border-radius: 5px;
-  background: #FFFFFF;
+  background: white;
+}
+
+@media(min-width: 40.0rem) {
+  .login, .chat {
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+
+.chat {
   flex: 1;
   overflow-y: scroll;
   margin: 15px 0;
-  padding: 5px;
 }
 
 .inputAction {
@@ -52,13 +48,4 @@ html, body, .app, .fullscreen {
   margin-left: 10px;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-@media(min-width: 40.0rem) {
-  .modal {
-    border-radius: 20px;
-    max-height: 50%;
-    margin: auto;
-    width: 50%;
-  }  
 }
