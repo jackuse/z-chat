@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react"
 
-function InputAction ({ value, setValue, action, label }) {
+function InputAction ({ value, setValue, action }) {
   const [_value, _setValue] = useState(value)
 
   const handleType = (e) => {
