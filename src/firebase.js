@@ -2,12 +2,12 @@ import firebase from "firebase"
 import "firebase/firestore"
 
 const config = {
-  apiKey: "AIzaSyCnoFyusmUwnyk-0o_MB20fNFHrMwCO2qY",
-  authDomain: "z-chat-c7c26.firebaseapp.com",
-  databaseURL: "https://z-chat-c7c26.firebaseio.com",
-  projectId: "z-chat-c7c26",
-  storageBucket: "z-chat-c7c26.appspot.com",
-  messagingSenderId: "1027754949639",
+  apiKey: "AIzaSyBIjnae9icHwPsWL-aJwGb_z-c1eqtm0Qo",
+  authDomain: "z-chat-631d6.firebaseapp.com",
+  databaseURL: "https://z-chat-631d6.firebaseio.com",
+  projectId: "z-chat-631d6",
+  storageBucket: "",
+  messagingSenderId: "245313210956"
 }
 firebase.initializeApp(config)
 
